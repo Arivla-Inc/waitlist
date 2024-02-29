@@ -1,16 +1,29 @@
 "use client"
 
 import React, {useState} from 'react'
+import Image from 'next/image'
 import Loader from './loader';
+import SuccessModal from './modal/modals/success';
 
 const Input = () => {
 
     const [email, setEmail] = useState('');
+    const [firstName, setFirstName] = useState('');
     const [error, setError] = useState(false);
     const [errorMsg, setErrorMsg] = useState("")
+    const [isBuyer, setIsBuyer] = useState(false)
+    const [isMerchant, setIsMerchant] = useState(false)
     const [isLoading, setIsLoading] = useState(false);
+    const [openSuccess, setOpenSuccess] = useState(false)
+
   
-  
+  const reset = () => {
+    setIsBuyer(false);
+    setIsMerchant(false);
+    setFirstName('');
+    setEmail('');
+    setError('')
+  }
   
     const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
   
@@ -19,7 +32,10 @@ const Input = () => {
       if (email.length === 0 || !regex.test(email)) {
         setError(true);
       }
-      if (email.length > 0 && regex.test(email)) {
+      if (firstName.length === 0 ) {
+        setError(true);
+      }
+      if (email.length > 0 && regex.test(email) && firstName.length > 0 ) {
         setIsLoading(true);
         const res = await fetch('/api/enlist', {
           method: 'POST',
@@ -27,57 +43,88 @@ const Input = () => {
             "content-Type": "application/json",
           },
           body: JSON.stringify({
-            email
+            email,
+            firstName,
+            isBuyer: isBuyer,
+            isMerchant: isMerchant
           })
         })
-        // if (res.status === 200){
-        //   setOpenSuccess(true)
-        // }
-        // if (res.status === 400) {
-        //   setErrorMsg("Email already waitlisted")
-        //   setTimeout(() => {
-        //     setErrorMsg(false);
-        //    }, 3000); 
-        // }
-        // if (res.status === 500) {
-        //   setErrorMsg("Server error, Please try again later")
-        //   setTimeout(() => {
-        //     setErrorMsg(false);
-        //    }, 3000); 
-        // }
-        setIsLoading(false)
-        setEmail('');
-        setError(false);
+        setIsLoading(false);
+        if (res.status === 200){
+          setOpenSuccess(true)
+         }
+         if (res.status === 400) {
+          setErrorMsg("Email already waitlisted")
+          setTimeout(() => {
+            setErrorMsg(false);
+           }, 3000); 
+        }
+        if (res.status === 500) {
+          setErrorMsg("Server error, Please try again later")
+          setTimeout(() => {
+            setErrorMsg(false);
+           }, 3000); 
+        }
+        reset()
       }
     };
 
 
   return (
     <>
-    <div className='flex space-x-4 mt-2'>
-    <div className='relative md:w-6/12 w-full'>
-    <form noValidate>
+    <p className=' mb-1 font-light'>You are Joining Arivla as a:</p>
+      <div className='flex w-full space-x-4'>
+      <button onClick={() => setIsBuyer(!isBuyer)} className={`${isBuyer ? "text-gray-900 border-gray-900" : "text-[#A3A3A3]"} border w-1/2 px-6 inline-flex items-center py-2.5 whitespace-nowrap`}>
+        <Image src="/buyer.svg" alt="" width={32} height={32} className='mr-2' />
+        Buyer</button>
+             <button onClick={() => setIsMerchant(!isMerchant)} className={`${isMerchant ? "text-gray-900 border-gray-900" : "text-[#A3A3A3]"} border w-1/2 px-6 inline-flex items-center py-2.5 whitespace-nowrap`}>
+             <Image src="/merchant.svg" alt="" width={32} height={32} className='mr-2' />
+              Merchant</button>
+        </div>
+    <div className='mt-2'>
+    <form onSubmit={handleSubmit} className='py-2' noValidate>
        <input
-                  className="border border-1 text-gray-800 p-3.5 bg-transparent text-sm w-full focus:outline-gray-800"
+                  className="my-2 border text-gray-800 p-4 text-sm w-full outline-none"
+                  name="firstName"
+                  type="text"
+                  placeholder="Enter Your First Name"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                />
+        <div className='text-left'>
+         {error && firstName.length <= 0 ? (
+           <p className="text-red-500 text-sm">First name is required</p>
+         ) : (
+           ''
+         )}
+           </div>
+                 <input
+                  className="my-2 border text-gray-800 p-4 text-sm w-full outline-none"
                   name="email"
                   type="email"
                   placeholder="Enter your email address..."
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-      </form>
-      </div>
-      <button onClick={handleSubmit} className="md:px-12 px-4 whitespace-nowrap py-2.5 bg-gray-900 text-[#FAFBFF]">{isLoading ? <Loader /> : "Join Waitlist"}</button>
-    </div>
-         <div className='text-left'>
+         <div className='text-left text-sm my-1'>
          {error && email.length <= 0 ? (
-           <p className="text-red-500 py-2">Email Address is required</p>
+           <p className="text-red-500">Email Address is required</p>
          ) : error && !regex.test(email) ? (
-           <p className="text-red-500 py-2">Please enter a valid email address</p>
+           <p className="text-red-500">Please enter a valid email address</p>
          ) : (
            ''
          )}
+                              {
+              errorMsg && <p className='text-red-500 text-sm'>{errorMsg}</p>
+            }
            </div>
+      <button disabled={isLoading} type="submit" className="md:px-12 w-full px-4 whitespace-nowrap py-4 bg-gray-900 text-[#FAFBFF]">{isLoading ? <Loader /> : "Join Waitlist"}</button>
+      </form>
+    </div>
+    <SuccessModal
+      openModal={openSuccess}
+      setOpenModal={setOpenSuccess}
+      />
            </>
   )
 }

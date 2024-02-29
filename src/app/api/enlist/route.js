@@ -1,3 +1,4 @@
+import { NextResponse } from "next/server";
 import client from "@/lib/prismadb"
 
 export async function POST(request) {
@@ -6,13 +7,19 @@ export async function POST(request) {
     where: {email: data.email}
   })
   if (user) {
-    return Response.json({message: "Email already waitlisted"})
-  }
-  user = await client.user.create({
+    console.log(user)
+    return new NextResponse(
+      JSON.stringify({ success: false, message: 'Email already waitlisted' }),
+      { status: 400, headers: { 'content-type': 'application/json' } },
+    );
+  } 
+  await client.user.create({
     data:{
-      email: data.email
+      email: data.email,
+      firstName: data.firstName,
+      isBuyer: data.isBuyer,
+      isMerchant: data.isMerchant
     }
   })
-  console.log(Response.json())
-  return Response.json({ message: "Email submitted succesfully", request: request})
+  return Response.json({code: 200, message: "Email submitted succesfully", request: request})
 }
