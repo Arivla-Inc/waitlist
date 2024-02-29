@@ -48,7 +48,7 @@ export default function Home() {
       </main>
       <div className='lg:hidden block w-full mt-4'>
         <Image
-          src='/mobile.webp'
+          src='/newmobile.webp'
           alt='arivla'
           width={1200}
           height={500}
