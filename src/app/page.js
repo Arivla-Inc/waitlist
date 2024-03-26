@@ -1,60 +1,53 @@
-import Image from "next/image"
-import Input from "@/components/input"
-import Footer from "@/components/footer"
+import Image from "next/image";
+import Input from "@/components/input";
+import Footer from "@/components/footer";
+import Header from "@/components/header";
+import Reasons from "@/components/Reasons";
 
 export default function Home() {
   return (
     <>
-      <main className='container mx-auto px-4'>
-        <div className='flex justify-center mt-8'>
-          <Image
-            src='/logo.svg'
-            alt='logo'
-            width={80}
-            height={80}
-          />
-        </div>
-        <div className='my-5 flex '>
-          <div className='w-full lg:w-6/12 '>
-            <div className='w-full lg:w-10/12'>
-              <h1 className='text-center font-semibold lg:text-left font-playfair-display text-[22px] lg:text-[40px] md:leading-normal capitalize'>
-                <span className='text-[15px] font-medium md:text-[26px]'>
-                  Discover Unmatched Elegance:
-                </span>{" "}
-                <br />
-                Join the Arivla’s Waitlist for Premium
-                Quality Fabrics Worldwide.
-              </h1>
-              <p className='text-center lg:text-left my-6 font-lato font-extralight'>
-                Join our waitlist for exclusive access to
-                the world's finest textiles. Elevate your
-                style with superior quality and
-                craftsmanship. Your journey to unparalleled
-                luxury begins here. Reserve your spot and
-                redefine sophistication with Arivla.
+      <Header />
+      <main className="container px-4 mx-auto">
+        <div className="flex mt-7 ">
+          <div className="w-full lg:w-6/12 ">
+            <h1 className="text-center font-medium lg:text-left font-playfair-display text-2xl md:text-[36px] md:leading-[56px] leading-9 capitalize">
+              Welcome to Arivla, your go-to spot for hassle-free fabric
+              shopping.
+            </h1>
+            <div className="flex flex-col gap-8 mt-6 mb-4 text-xl font-light leading-9 text-center lg:text-left font-lato lg:gap-6">
+              <p>
+                {`Ready to level up your fashion game? Don't miss out on the
+                chance to be part of this game-changing fashion movement.`}
               </p>
-              <Input />
+              <Image
+                src="/hero_image.webp"
+                alt="arivla"
+                width={1200}
+                height={500}
+                className=" lg:hidden"
+              />
+              <p>
+                {`Sign up to our waitlist now and get ready to slay the style game
+                with Arivla. Whether you're buying or selling, join us and stay
+                ahead of the curve!`}
+              </p>
             </div>
+            <Input />
           </div>
-          <div className='hidden lg:block w-full md:w-1/3 mt-4 px-6 flex-1'>
+          <div className="flex-1 hidden w-full px-6 mt-4 lg:block md:w-1/3">
             <Image
-              src='/desktop.webp'
-              alt='arivla'
-              width={600}
+              src="/hero_image.webp"
+              alt="arivla"
+              width={1200}
               height={500}
             />
           </div>
         </div>
+        <Reasons />
       </main>
-      <div className='lg:hidden block w-full mt-4'>
-        <Image
-          src='/newmobile.webp'
-          alt='arivla'
-          width={1200}
-          height={500}
-        />
-      </div>
+
       <Footer />
     </>
-  )
+  );
 }
