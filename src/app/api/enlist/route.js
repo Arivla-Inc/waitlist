@@ -23,3 +23,4 @@ export async function POST(request) {
   })
   return Response.json({code: 200, message: "Email submitted succesfully", request: request})
 }
+

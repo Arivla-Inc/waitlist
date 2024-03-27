@@ -23,6 +23,15 @@ const Input = () => {
     setError("");
   };
 
+  const setBuyer = () => {
+    setIsBuyer(!isBuyer)
+    setError(!error)
+  }
+  const setMerchant = () => {
+    setIsMerchant(!isMerchant)
+    setError(!error)
+  }
+
   const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 
   const handleSubmit = async (e) => {
@@ -33,7 +42,10 @@ const Input = () => {
     if (firstName.length === 0) {
       setError(true);
     }
-    if (email.length > 0 && regex.test(email) && firstName.length > 0) {
+    if (isBuyer === false && isMerchant === false) {
+      setError(true);
+    }
+    if (email.length > 0 && regex.test(email) && firstName.length > 0 && isBuyer !==false || isMerchant !== false) {
       setIsLoading(true);
       const res = await fetch("/api/enlist", {
         method: "POST",
@@ -73,9 +85,9 @@ const Input = () => {
       <p className="mb-2 text-sm font-light text-center text-[#344054]">
         (You can select either the Buyer, the Merchant, or both options)
       </p>
-      <div className="flex w-full space-x-4">
+      <div className="flex w-full space-x-2">
         <button
-          onClick={() => setIsBuyer(!isBuyer)}
+          onClick={() => setBuyer()}
           className={`${
             isBuyer ? "text-gray-900 border-gray-900" : "text-[#A3A3A3]"
           } border w-1/2 px-6 inline-flex items-center py-2.5 whitespace-nowrap`}
@@ -90,7 +102,7 @@ const Input = () => {
           Buyer
         </button>
         <button
-          onClick={() => setIsMerchant(!isMerchant)}
+          onClick={() => setMerchant()}
           className={`${
             isMerchant ? "text-gray-900 border-gray-900" : "text-[#A3A3A3]"
           } border w-1/2 px-6 inline-flex items-center py-2.5 whitespace-nowrap`}
@@ -105,6 +117,10 @@ const Input = () => {
           Merchant
         </button>
       </div>
+      {error && isBuyer === false && isMerchant === false &&
+       (
+        <p className="text-sm text-red-500">Please select at least one option</p>)
+      }
       <div className="mt-2">
         <form onSubmit={handleSubmit} className="py-2" noValidate>
           <input
