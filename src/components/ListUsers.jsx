@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   createColumnHelper,
   getCoreRowModel,
@@ -8,99 +8,105 @@ import {
 } from "@tanstack/react-table";
 import Table from "./Table";
 import TableControl from "./TableControl";
+import client from "@/lib/prismadb";
 
-const defaultData = [
-  {
-    id: "1",
-    firstName: "Merchant Test",
-    email: "test@test.com",
-    isMerchant: true,
-    isBuyer: false,
-    createdAt: "2024-03-25T17:30:07.483Z",
-    updatedAt: "2024-03-25T17:30:07.483Z",
-  },
-  {
-    id: "2",
-    firstName: "Buyer Test",
-    email: "test@test.com",
-    isMerchant: false,
-    isBuyer: true,
-    createdAt: "2024-03-25T17:30:07.483Z",
-    updatedAt: "2024-03-25T17:30:07.483Z",
-  },
-  {
-    id: "3",
-    firstName: "Both Test",
-    email: "test@test.com",
-    isMerchant: true,
-    isBuyer: true,
-    createdAt: "2024-03-25T17:30:07.483Z",
-    updatedAt: "2024-03-25T17:30:07.483Z",
-  },
-  {
-    id: "4",
-    firstName: "Test",
-    email: "test@test.com",
-    isMerchant: true,
-    isBuyer: true,
-    createdAt: "2024-03-25T17:30:07.483Z",
-    updatedAt: "2024-03-25T17:30:07.483Z",
-  },
-  {
-    id: "5",
-    firstName: "Test",
-    email: "test@test.com",
-    isMerchant: true,
-    isBuyer: true,
-    createdAt: "2024-03-25T17:30:07.483Z",
-    updatedAt: "2024-03-25T17:30:07.483Z",
-  },
-  {
-    id: "6",
-    firstName: "Test",
-    email: "test@test.com",
-    isMerchant: true,
-    isBuyer: true,
-    createdAt: "2024-03-25T17:30:07.483Z",
-    updatedAt: "2024-03-25T17:30:07.483Z",
-  },
-  {
-    id: "7",
-    firstName: "Test",
-    email: "test@test.com",
-    isMerchant: true,
-    isBuyer: true,
-    createdAt: "2024-03-25T17:30:07.483Z",
-    updatedAt: "2024-03-25T17:30:07.483Z",
-  },
-  {
-    id: "8",
-    firstName: "Test",
-    email: "test@test.com",
-    isMerchant: true,
-    isBuyer: true,
-    createdAt: "2024-03-25T17:30:07.483Z",
-    updatedAt: "2024-03-25T17:30:07.483Z",
-  },
-  {
-    id: "9",
-    firstName: "Test",
-    email: "test@test.com",
-    isMerchant: true,
-    isBuyer: true,
-    createdAt: "2024-03-25T17:30:07.483Z",
-    updatedAt: "2024-03-25T17:30:07.483Z",
-  },
-  {
-    id: "10",
-    firstName: "Test",
-    email: "test@test.com",
-    isMerchant: true,
-    isBuyer: true,
-    createdAt: "2024-03-25T17:30:07.483Z",
-    updatedAt: "2024-03-25T17:30:07.483Z",
-  },
-];
+// const defaultData = [
+//   {
+//     id: "1",
+//     firstName: "Merchant Test",
+//     email: "test@test.com",
+//     isMerchant: true,
+//     isBuyer: false,
+//     createdAt: "2024-03-25T17:30:07.483Z",
+//     updatedAt: "2024-03-25T17:30:07.483Z",
+//   },
+//   {
+//     id: "2",
+//     firstName: "Buyer Test",
+//     email: "test@test.com",
+//     isMerchant: false,
+//     isBuyer: true,
+//     createdAt: "2024-03-25T17:30:07.483Z",
+//     updatedAt: "2024-03-25T17:30:07.483Z",
+//   },
+//   {
+//     id: "3",
+//     firstName: "Both Test",
+//     email: "test@test.com",
+//     isMerchant: true,
+//     isBuyer: true,
+//     createdAt: "2024-03-25T17:30:07.483Z",
+//     updatedAt: "2024-03-25T17:30:07.483Z",
+//   },
+//   {
+//     id: "4",
+//     firstName: "Test",
+//     email: "test@test.com",
+//     isMerchant: true,
+//     isBuyer: true,
+//     createdAt: "2024-03-25T17:30:07.483Z",
+//     updatedAt: "2024-03-25T17:30:07.483Z",
+//   },
+//   {
+//     id: "5",
+//     firstName: "Test",
+//     email: "test@test.com",
+//     isMerchant: true,
+//     isBuyer: true,
+//     createdAt: "2024-03-25T17:30:07.483Z",
+//     updatedAt: "2024-03-25T17:30:07.483Z",
+//   },
+//   {
+//     id: "6",
+//     firstName: "Test",
+//     email: "test@test.com",
+//     isMerchant: true,
+//     isBuyer: true,
+//     createdAt: "2024-03-25T17:30:07.483Z",
+//     updatedAt: "2024-03-25T17:30:07.483Z",
+//   },
+//   {
+//     id: "7",
+//     firstName: "Test",
+//     email: "test@test.com",
+//     isMerchant: true,
+//     isBuyer: true,
+//     createdAt: "2024-03-25T17:30:07.483Z",
+//     updatedAt: "2024-03-25T17:30:07.483Z",
+//   },
+//   {
+//     id: "8",
+//     firstName: "Test",
+//     email: "test@test.com",
+//     isMerchant: true,
+//     isBuyer: true,
+//     createdAt: "2024-03-25T17:30:07.483Z",
+//     updatedAt: "2024-03-25T17:30:07.483Z",
+//   },
+//   {
+//     id: "9",
+//     firstName: "Test",
+//     email: "test@test.com",
+//     isMerchant: true,
+//     isBuyer: true,
+//     createdAt: "2024-03-25T17:30:07.483Z",
+//     updatedAt: "2024-03-25T17:30:07.483Z",
+//   },
+//   {
+//     id: "10",
+//     firstName: "Test",
+//     email: "test@test.com",
+//     isMerchant: true,
+//     isBuyer: true,
+//     createdAt: "2024-03-25T17:30:07.483Z",
+//     updatedAt: "2024-03-25T17:30:07.483Z",
+//   },
+// ];
+
+
+
+
+
 
 const columnHelper = createColumnHelper();
 
@@ -132,8 +138,10 @@ const columns = [
   }),
 ];
 
-const ListUsers = () => {
-  const [data] = useState(() => [...defaultData]);
+
+
+const ListUsers = ({data}) => {
+  // const [data, setData] = useState([]);
 
   const table = useReactTable({
     data,

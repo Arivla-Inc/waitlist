@@ -2,7 +2,7 @@ import { flexRender } from "@tanstack/react-table";
 
 const Table = ({ table }) => {
   return (
-    <div className=" bg-white border border-[#E0E7ED] rounded-xl">
+    <div className=" bg-white border border-[#E0E7ED] rounded-xl overflow-auto">
       <table className="w-full">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
