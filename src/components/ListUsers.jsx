@@ -103,16 +103,11 @@ import client from "@/lib/prismadb";
 //   },
 // ];
 
-
-
-
-
-
 const columnHelper = createColumnHelper();
 
 const columns = [
   columnHelper.accessor("id", {
-    cell: (info) => info.getValue(),
+    cell: (props) => props.row.index + 1,
     header: () => <span>Id</span>,
   }),
   columnHelper.accessor("firstName", {
@@ -138,9 +133,7 @@ const columns = [
   }),
 ];
 
-
-
-const ListUsers = ({data}) => {
+const ListUsers = ({ data }) => {
   // const [data, setData] = useState([]);
 
   const table = useReactTable({
