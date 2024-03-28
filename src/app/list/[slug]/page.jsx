@@ -8,9 +8,11 @@ async function getWaitlist(){
 }
 
 export default async function Page({ params }) {
-    if (params.slug === "mylist"){ 
+    if (params.slug !== "mylist"){
+        return 404
+    }
     const users = await getWaitlist();
     console.log(users)
   return <div>Users {params.slug}</div>
-}
+
 }

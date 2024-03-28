@@ -23,14 +23,6 @@ const Input = () => {
     setError("");
   };
 
-  const setBuyer = () => {
-    setIsBuyer(!isBuyer)
-    setError(!error)
-  }
-  const setMerchant = () => {
-    setIsMerchant(!isMerchant)
-    setError(!error)
-  }
 
   const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 
@@ -87,7 +79,7 @@ const Input = () => {
       </p>
       <div className="flex w-full space-x-2">
         <button
-          onClick={() => setBuyer()}
+          onClick={() => setIsBuyer(!isBuyer)}
           className={`${
             isBuyer ? "text-gray-900 border-gray-900" : "text-[#A3A3A3]"
           } border w-1/2 px-6 inline-flex items-center py-2.5 whitespace-nowrap`}
@@ -102,7 +94,7 @@ const Input = () => {
           Buyer
         </button>
         <button
-          onClick={() => setMerchant()}
+          onClick={() =>  setIsMerchant(!isMerchant)}
           className={`${
             isMerchant ? "text-gray-900 border-gray-900" : "text-[#A3A3A3]"
           } border w-1/2 px-6 inline-flex items-center py-2.5 whitespace-nowrap`}
