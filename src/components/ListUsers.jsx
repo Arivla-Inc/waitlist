@@ -144,7 +144,7 @@ const ListUsers = ({ data }) => {
     initialState: {
       pagination: {
         pageIndex: 0,
-        pageSize: 2,
+        pageSize: 10,
       },
     },
   });
