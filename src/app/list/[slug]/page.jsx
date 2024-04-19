@@ -10,7 +10,7 @@ async function getWaitlist(){
 }
 
 export default async function Page({ params }) {
-      if (params.slug === "mylist"){
+      if (params.slug === process.env.SLUG_CODE){
       const users = await getWaitlist();
       console.log(users)
       return (
