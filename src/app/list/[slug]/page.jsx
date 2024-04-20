@@ -12,7 +12,7 @@ async function getWaitlist() {
 export default async function Page({ params }) {
   if (params.slug === process.env.SLUG_CODE) {
     const users = await getWaitlist();
-    console.log(users);
+    // console.log(users);
     return (
       <div className=" bg-[#F2F3F8]  min-h-screen">
         <div className="container flex flex-col gap-10 mx-auto py-14 bg-[#F2F3F8]">
