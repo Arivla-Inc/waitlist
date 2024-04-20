@@ -1,9 +1,7 @@
-"use client"
-import { useState } from 'react';
-import json2csv from 'json2csv';
+"use client";
+import json2csv from "json2csv";
 
-const CsvDownload = ({dataArray}) => {
-
+const CsvDownload = ({ dataArray }) => {
   // const [dataArray] = useState([
   //   { name: 'John', age: 30 },
   //   { name: 'Jane', age: 25 },
@@ -15,15 +13,15 @@ const CsvDownload = ({dataArray}) => {
     const csvData = json2csv.parse(dataArray);
 
     // Create a Blob object with the CSV data
-    const blob = new Blob([csvData], { type: 'text/csv' });
+    const blob = new Blob([csvData], { type: "text/csv" });
 
     // Create a URL for the Blob object
     const url = window.URL.createObjectURL(blob);
 
     // Create a temporary <a> element to trigger the download
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
-    a.download = 'data.csv';
+    a.download = "data.csv";
 
     // Append the <a> element to the document body and click it
     document.body.appendChild(a);
@@ -37,7 +35,10 @@ const CsvDownload = ({dataArray}) => {
   };
 
   return (
-    <button onClick={handleDownload} className="flex items-center gap-2 px-4 py-3 transition-all bg-black hover:opacity-80">
+    <button
+      onClick={handleDownload}
+      className="flex items-center gap-2 px-4 py-3 transition-all bg-black hover:opacity-80"
+    >
       <span className="text-sm text-white">Download .CSV</span>
     </button>
   );
