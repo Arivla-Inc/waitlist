@@ -8,13 +8,17 @@ export async function sendMail({
   body,
 }) {
   const { EMAIL, EMAIL_PASSWORD } = process.env;
+  
 
   const transport = nodemailer.createTransport({
-    service: "gmail",
+    host: 'smtppro.zoho.com',
+    secure: true,
+    port: '465',
     auth: {
       user: EMAIL,
       pass: EMAIL_PASSWORD,
     },
+    logger: true,
   });
   try {
     const testResult = await transport.verify();
