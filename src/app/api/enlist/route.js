@@ -33,6 +33,7 @@ export async function POST(request) {
     },
   })
   await sendMail({
+    from: '"Arivla Waitlist" <waitlist@arivla.com>',
     to: data.email,
     subject: "Thank you for joining Arivla waitlist",
     body: compileWelcomeTemplate(data.firstName),
