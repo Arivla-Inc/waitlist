@@ -3,6 +3,7 @@ import * as handlebars from "handlebars";
 import { newTemplate } from "./templates/new";
 
 export async function sendMail({
+  from,
   to,
   subject,
   body,
@@ -30,7 +31,7 @@ export async function sendMail({
 
   try {
     const sendResult = await transport.sendMail({
-      from: EMAIL,
+      from,
       to,
       subject,
       html: body,
