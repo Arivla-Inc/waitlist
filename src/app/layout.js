@@ -1,6 +1,7 @@
 import { Lato, Playfair_Display } from "next/font/google";
-import { cn } from "@/lib/utils";
+import { cn } from "../lib/utils";
 import "./globals.css";
+import ToastProvider from "@/provider/ToastProvider";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -23,11 +24,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={cn(
+      <body
+        className={cn(
           "flex flex-col min-h-screen bg-white font-lato antialiased",
           lato.variable,
           playfair.variable
-        )}>{children}</body>
+        )}
+      >
+        <ToastProvider>{children}</ToastProvider>
+      </body>
     </html>
   );
 }

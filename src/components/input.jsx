@@ -23,7 +23,6 @@ const Input = () => {
     setError("");
   };
 
-
   const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 
   const handleSubmit = async (e) => {
@@ -37,7 +36,13 @@ const Input = () => {
     if (isBuyer === false && isMerchant === false) {
       setError(true);
     }
-    if (email.length > 0 && regex.test(email) && firstName.length > 0 && isBuyer !==false || isMerchant !== false) {
+    if (
+      (email.length > 0 &&
+        regex.test(email) &&
+        firstName.length > 0 &&
+        isBuyer !== false) ||
+      isMerchant !== false
+    ) {
       setIsLoading(true);
       const res = await fetch("/api/enlist", {
         method: "POST",
@@ -94,7 +99,7 @@ const Input = () => {
           Buyer
         </button>
         <button
-          onClick={() =>  setIsMerchant(!isMerchant)}
+          onClick={() => setIsMerchant(!isMerchant)}
           className={`${
             isMerchant ? "text-gray-900 border-gray-900" : "text-[#A3A3A3]"
           } border w-1/2 px-6 inline-flex items-center py-2.5 whitespace-nowrap`}
@@ -109,10 +114,11 @@ const Input = () => {
           Merchant
         </button>
       </div>
-      {error && isBuyer === false && isMerchant === false &&
-       (
-        <p className="text-sm text-red-500">Please select at least one option</p>)
-      }
+      {error && isBuyer === false && isMerchant === false && (
+        <p className="text-sm text-red-500">
+          Please select at least one option
+        </p>
+      )}
       <div className="mt-2">
         <form onSubmit={handleSubmit} className="py-2" noValidate>
           <input
