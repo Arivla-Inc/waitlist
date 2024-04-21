@@ -37,11 +37,11 @@ const Input = () => {
       setError(true);
     }
     if (
-      (email.length > 0 &&
+      email.length > 0 &&
         regex.test(email) &&
-        firstName.length > 0 &&
-        isBuyer !== false) ||
-      isMerchant !== false
+        firstName.length > 0 && 
+       (isBuyer ||
+      isMerchant) !== false
     ) {
       setIsLoading(true);
       const res = await fetch("/api/enlist", {

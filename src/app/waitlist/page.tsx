@@ -48,6 +48,7 @@ const Login = () => {
       const resData = await res.json();
 
       if (res.status === 200) {
+        toast.success(resData.message);
         //store in store
         const accessToken = resData.accessToken;
         accessTokenStore.accessToken = accessToken;
