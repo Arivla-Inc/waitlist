@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .pagination-block {
+    @apply w-[32px] h-[32px] rounded-[8px] p-[16px_12px] border border-[#E0E7ED] bg-white flex items-center justify-center text-[#828282] 
+    text-[0.875rem]  hover:enabled:bg-black hover:enabled:text-white transition-all disabled:cursor-not-allowed disabled:bg-[#F1F3F4];
+  }
+}
