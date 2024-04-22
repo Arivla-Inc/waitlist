@@ -1,6 +1,5 @@
 import { Lato, Playfair_Display } from "next/font/google";
 import { cn } from "../lib/utils";
-import Head from "next/head";
 import "./globals.css";
 import ToastProvider from "@/provider/ToastProvider";
 
@@ -22,12 +21,14 @@ export const metadata = {
   description: "E-commerce, Online shopping for native African wears",
 };
 
+export const viewport = {
+  initialScale: 1,
+  width: 'device-width'
+}
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-        <Head>
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        </Head>
       <body
         className={cn(
           "flex flex-col min-h-screen bg-white font-lato antialiased",
