@@ -15,7 +15,7 @@ model User {
   id              Int             @id @default(autoincrement()) 
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
-  email           String          @unique
+  email           String          
   firstName       String  
   isMerchant      Boolean         @default(false)
   isBuyer         Boolean         @default(false)
