@@ -8,22 +8,22 @@ import {
 
 export async function POST(request) {
   const data = await request.json()
-  // let user = await client.user.findUnique({
-  //   where: { email: data.email },
-  // })
-  // if (user) {
-  //   console.log(user)
-  //   return new NextResponse(
-  //     JSON.stringify({
-  //       success: false,
-  //       message: "Email already waitlisted",
-  //     }),
-  //     {
-  //       status: 400,
-  //       headers: { "content-type": "application/json" },
-  //     }
-  //   )
-  // }
+  let user = await client.user.findUnique({
+    where: { email: data.email },
+  })
+  if (user) {
+    console.log(user)
+    return new NextResponse(
+      JSON.stringify({
+        success: false,
+        message: "Email already waitlisted",
+      }),
+      {
+        status: 400,
+        headers: { "content-type": "application/json" },
+      }
+    )
+  }
   await client.user.create({
     data: {
       email: data.email,
