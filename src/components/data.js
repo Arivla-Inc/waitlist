@@ -1,6 +1,6 @@
 export const ReasonsData = [
   {
-    imageSrc: "/endless_reason.png",
+    imageSrc: "/endless_reason2.png",
     title: "Endless Choices",
     subText:
       "From lace to brocade, we've got every type of fabric you could dream of for men and women, all under one virtual roof.",
@@ -12,7 +12,7 @@ export const ReasonsData = [
       "Ever dreamt of running your own fabric empire? Well, now's your chance to make it happen with Arivla – we're giving you the keys to your very own online store!",
   },
   {
-    imageSrc: "/access_reason.png",
+    imageSrc: "/front_reason.png",
     title: "Front-of-the-Line Access",
     subText:
       "Imagine being the first to snag the hottest fabrics before anyone else even knows they exist – that's the power of being part of our waitlist crew!",

@@ -8,3 +8,17 @@
     text-[0.875rem]  hover:enabled:bg-black hover:enabled:text-white transition-all disabled:cursor-not-allowed disabled:bg-[#F1F3F4];
   }
 }
+
+@media only screen and (hover: none) and (pointer: coarse) {
+  input,
+  select,
+  textarea {
+    font-size: 11px;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    font-size: 16px;
+  }
+}
