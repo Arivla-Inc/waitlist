@@ -127,7 +127,6 @@ const Input = () => {
             placeholder="Enter Your First Name"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
-            autoFocus={false}
           />
           <div className="text-left">
             {error && firstName.length <= 0 ? (
