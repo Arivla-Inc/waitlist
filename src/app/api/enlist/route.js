@@ -9,7 +9,7 @@ export async function POST(request) {
     where: { email: data.email },
   });
   if (user) {
-    console.log(user);
+    // console.log(user);
     return new NextResponse(
       JSON.stringify({
         success: false,
