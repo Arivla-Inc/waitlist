@@ -38,10 +38,9 @@ const Input = () => {
     }
     if (
       email.length > 0 &&
-        regex.test(email) &&
-        firstName.length > 0 && 
-       (isBuyer ||
-      isMerchant) !== false
+      regex.test(email) &&
+      firstName.length > 0 &&
+      (isBuyer || isMerchant) !== false
     ) {
       setIsLoading(true);
       const res = await fetch("/api/enlist", {
@@ -128,6 +127,7 @@ const Input = () => {
             placeholder="Enter Your First Name"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
+            autoFocus={false}
           />
           <div className="text-left">
             {error && firstName.length <= 0 ? (
