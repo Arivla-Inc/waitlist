@@ -160,6 +160,17 @@ const Input = () => {
           >
             {isLoading ? <Loader /> : "Join Waitlist"}
           </button>
+          <div className="mt-2 font-light text-center">
+            Excited to stay in the loop?{" "}
+            <a
+              href="https://www.instagram.com/arivla_lifestyle?igsh=a2czaDZqNzcyNGFx&utm_source=qr"
+              target="_blank"
+              className="font-normal underline"
+            >
+              Click here
+            </a>{" "}
+            to follow our Instagram page for exclusive updates and sneak peeks!
+          </div>
         </form>
       </div>
       <SuccessModal openModal={openSuccess} setOpenModal={setOpenSuccess} />
