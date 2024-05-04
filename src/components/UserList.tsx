@@ -16,7 +16,7 @@ const UserList: FC<Props> = ({ users }) => {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      router.push("/waitlist");
+      router.push("/list");
     }
   }, [isLoggedIn, router]);
 
