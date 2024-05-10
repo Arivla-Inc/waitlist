@@ -74,7 +74,13 @@ const Login = () => {
       </div>
 
       <div className="container flex flex-col items-center w-full mx-auto py-14">
-        <Image src="/logo.svg" alt="" width={120} height={120} />
+        <Image
+          src="/logo.jpg"
+          alt="logo"
+          width={120}
+          height={120}
+          quality={100}
+        />
         <div className="mt-6 text-2xl font-bold text-black mb-11">
           WAITLIST LOGIN
         </div>
