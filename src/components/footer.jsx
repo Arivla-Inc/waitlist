@@ -3,7 +3,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="container flex flex-col-reverse items-center justify-between gap-4 p-4 mx-auto sm:items-end sm:flex-row">
+    <div className="container grid items-end gap-4 p-4 mx-auto sm:grid-cols-3">
       <div className="flex flex-col items-center gap-4">
         <Image
           src="/logo.jpg"
@@ -15,10 +15,10 @@ const Footer = () => {
 
         <div className="font-light text-center">Arivla! Where Trends Meet.</div>
       </div>
-      <p className="italic font-light text-center font-lato">
+      <p className="row-start-2 italic font-light text-center font-lato sm:row-start-auto">
         © <em>{new Date().getFullYear()}, Arivla. All right reserved</em>
       </p>
-      <div className="flex flex-col items-end gap-4 font-light">
+      <div className="flex flex-col items-center row-start-1 gap-4 font-light sm:row-start-auto sm:items-end">
         <div className="font-light">Follow us on:</div>
         <a
           href="https://www.instagram.com/arivla_lifestyle?igsh=a2czaDZqNzcyNGFx&utm_source=qr"
