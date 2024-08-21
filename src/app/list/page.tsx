@@ -34,7 +34,7 @@ const Login = () => {
     }
     if (email.length > 0 && regex.test(email) && password.length > 0) {
       setIsLoading(true);
-      const res = await fetch(`${api}/user/admin-login`, {
+      const res = await fetch(`${api}/admin/admin-login`, {
         method: "POST",
         headers: {
           "content-Type": "application/json",
