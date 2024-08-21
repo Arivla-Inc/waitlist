@@ -45,8 +45,8 @@ const Login = () => {
         }),
       });
       setIsLoading(false);
-      const resData = await res.json();
-
+      const resData1 = await res.json();
+      const resData = resData1.data
       if (res.status === 200) {
         toast.success(resData.message);
         //store in store
